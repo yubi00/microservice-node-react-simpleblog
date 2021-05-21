@@ -8,7 +8,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: 12yubikhadka/client
+    - image: 12yubikhadka/postsclient
       context: client
       docker:
         dockerfile: Dockerfile
