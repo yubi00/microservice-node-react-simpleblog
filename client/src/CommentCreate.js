@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useCreateComments } from './hooks/useCreateComments';
 
 const CommentCreate = ({ postId }) => {
   const [content, setContent] = useState('');
+  const { isLoading, isError, error, mutate } = useCreateComments(postId, content)
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(`http://posts.com/posts/${postId}/comments`, {
-      content
-    });
+   mutate({ postId, content })
     setContent('');
   };
+
+
+  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
+  if(isError) return <div className='container d-flex justify-content-center'>{error.message}</div>
 
   return (
     <div>

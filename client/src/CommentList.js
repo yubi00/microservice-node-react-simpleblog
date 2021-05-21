@@ -1,6 +1,15 @@
 import React from 'react';
+import { useComments } from './hooks/useComments';
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ postId }) => {
+  const { data, isLoading, isError, error } = useComments(postId)
+
+
+  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
+  if(isError) return <div className='container d-flex justify-content-center'>{error.message}</div>
+
+  const comments = Object.values(data.data)
+
   const renderedComments = comments.map((comment) => {
     let content;
 
@@ -20,7 +29,8 @@ const CommentList = ({ comments }) => {
 
   return (
     <div>
-      {comments.length !== 0 && (
+      {
+      comments.length !== 0 && (
         <strong>
           {comments.length} {comments.length > 1 ? 'comments' : 'comment'}{' '}
         </strong>

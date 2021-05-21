@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import CommentCreate from './CommentCreate';
 import CommentList from './CommentList';
+import { usePosts } from './hooks/usePosts';
 
 const PostList = () => {
-  const [posts, setPosts] = useState([]);
+ const { data, error, isError, isLoading } = usePosts() 
+  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
+  if(isError) return <div className='container d-flex justify-content-center'>{error.message}</div>
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await axios.get('http://posts.com/posts');
-      setPosts(Object.values(res.data));
-    };
-    fetchPosts();
-  }, []);
-
-  const renderedPosts = posts.map((post) => (
+  const renderedPosts = Object.values(data.data).map((post) => (
     <div
       key={post.id}
       className='card'
@@ -22,7 +16,7 @@ const PostList = () => {
     >
       <div className='card-body'>
         <h3>{post.title}</h3>
-        <CommentList comments={post.comments} />
+        <CommentList postId={post.id} />
         <CommentCreate postId={post.id} />
       </div>
     </div>

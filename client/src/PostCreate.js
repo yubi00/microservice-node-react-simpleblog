@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useCreatePost } from './hooks/useCreatePost';
 
 const PostCreate = () => {
   const [title, setTtile] = useState('');
+  const { isLoading, isError, error, mutate } = useCreatePost(title)
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post('http://posts.com/posts/create', {
-      title
-    });
+    mutate(title)
     setTtile('');
   };
+
+  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
+  if(isError) return <div className='container d-flex justify-content-center'>{ error.message }</div>
+
   return (
     <div>
       <form onSubmit={onSubmit}>
