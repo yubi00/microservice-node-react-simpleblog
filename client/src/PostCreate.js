@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
-import { useCreatePost } from './hooks/useCreatePost';
+import React, { useState } from "react";
+import { useCreatePost } from "./hooks/useCreatePost";
 
 const PostCreate = () => {
-  const [title, setTtile] = useState('');
-  const { isLoading, isError, error, mutate } = useCreatePost(title)
+  const [title, setTtile] = useState("");
+  const { isLoading, isError, error, mutate } = useCreatePost(title);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    mutate(title)
-    setTtile('');
+    mutate(title);
+    setTtile("");
   };
 
-  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
-  if(isError) return <div className='container d-flex justify-content-center'>{ error.message }</div>
+  if (isLoading)
+    return (
+      <div className='container d-flex justify-content-center'>Loading...</div>
+    );
+  if (isError)
+    return (
+      <div className='container d-flex justify-content-center'>
+        {error.message}
+      </div>
+    );
 
   return (
     <div>

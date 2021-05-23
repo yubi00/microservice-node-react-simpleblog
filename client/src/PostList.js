@@ -8,7 +8,7 @@ const PostList = () => {
   if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
   if(isError) return <div className='container d-flex justify-content-center'>{error.message}</div>
 
-  const renderedPosts = Object.values(data.data).map((post) => (
+  const renderedPosts =data.map((post) => (
     <div
       key={post.id}
       className='card'
