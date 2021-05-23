@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
-import { useCreateComments } from './hooks/useCreateComments';
+import React, { useState } from "react";
+import { useCreateComments } from "./hooks/useCreateComments";
 
 const CommentCreate = ({ postId }) => {
-  const [content, setContent] = useState('');
-  const { isLoading, isError, error, mutate } = useCreateComments(postId, content)
+  const [content, setContent] = useState("");
+  const { isLoading, isError, error, mutate } = useCreateComments(
+    postId,
+    content
+  );
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-   mutate({ postId, content })
-    setContent('');
+    mutate(content);
+    setContent("");
   };
 
-
-  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
-  if(isError) return <div className='container d-flex justify-content-center'>{error.message}</div>
+  if (isLoading)
+    return (
+      <div className='container d-flex justify-content-center'>Loading...</div>
+    );
+  if (isError)
+    return (
+      <div className='container d-flex justify-content-center'>
+        {error.message}
+      </div>
+    );
 
   return (
     <div>
