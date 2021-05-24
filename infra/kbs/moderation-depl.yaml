@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: moderation
-          image: 12yubikhadka/moderation
+          image: us.gcr.io/alpine-sentry-314612/moderation
 ---
 apiVersion: v1
 kind: Service

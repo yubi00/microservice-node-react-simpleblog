@@ -5,54 +5,56 @@ deploy:
     manifests:
       - ./infra/kbs/*
 build:
-  local:
-    push: false
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: alpine-sentry-314612
   artifacts:
-    - image: 12yubikhadka/postsclient
+    - image: us.gcr.io/alpine-sentry-314612/client
       context: client
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.js'
+          - src: "src/**/*.js"
             dest: .
-    - image: 12yubikhadka/comments
+    - image: us.gcr.io/alpine-sentry-314612/comments
       context: comments
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: '*.js'
+          - src: "*.js"
             dest: .
-    - image: 12yubikhadka/event-bus
+    - image: us.gcr.io/alpine-sentry-314612/event-bus
       context: event-bus
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: '*.js'
+          - src: "*.js"
             dest: .
-    - image: 12yubikhadka/moderation
+    - image: us.gcr.io/alpine-sentry-314612/moderation
       context: moderation
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: '*.js'
+          - src: "*.js"
             dest: .
-    - image: 12yubikhadka/posts
+    - image: us.gcr.io/alpine-sentry-314612/posts
       context: posts
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: '*.js'
+          - src: "*.js"
             dest: .
-    - image: 12yubikhadka/query
+    - image: us.gcr.io/alpine-sentry-314612/query
       context: query
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: '*.js'
+          - src: "*.js"
             dest: .

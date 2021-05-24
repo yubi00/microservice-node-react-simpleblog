@@ -1,18 +1,27 @@
-import React from 'react';
-import CommentCreate from './CommentCreate';
-import CommentList from './CommentList';
-import { usePosts } from './hooks/usePosts';
+import React from "react";
+import CommentCreate from "./CommentCreate";
+import CommentList from "./CommentList";
+import { usePosts } from "./hooks/usePosts";
 
 const PostList = () => {
- const { data, error, isError, isLoading } = usePosts() 
-  if(isLoading) return <div className='container d-flex justify-content-center'>Loading...</div>
-  if(isError) return <div className='container d-flex justify-content-center'>{error.message}</div>
+  const { data, error, isError, isLoading } = usePosts();
 
-  const renderedPosts =data.map((post) => (
+  if (isLoading)
+    return (
+      <div className='container d-flex justify-content-center'>Loading...</div>
+    );
+  if (isError)
+    return (
+      <div className='container d-flex justify-content-center'>
+        {error.message}
+      </div>
+    );
+
+  const renderedPosts = data.map((post) => (
     <div
       key={post.id}
       className='card'
-      style={{ width: '30%', marginBottom: '20px' }}
+      style={{ width: "30%", marginBottom: "20px" }}
     >
       <div className='card-body'>
         <h3>{post.title}</h3>

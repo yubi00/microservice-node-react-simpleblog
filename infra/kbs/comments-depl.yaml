@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: comments
-          image: 12yubikhadka/comments
+          image: us.gcr.io/alpine-sentry-314612/comments
 ---
 apiVersion: v1
 kind: Service

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: event-bus
-          image: 12yubikhadka/event-bus
+          image: us.gcr.io/alpine-sentry-314612/event-bus
 ---
 apiVersion: v1
 kind: Service

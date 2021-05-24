@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: posts
-          image: 12yubikhadka/posts
+          image: us.gcr.io/alpine-sentry-314612/posts
+
 ---
 apiVersion: v1
 kind: Service
